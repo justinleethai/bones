@@ -11,12 +11,14 @@ table = doc.find_all('table')
 totals = table[0]
 sigstrike = table[2]
 
+# Grabbing headers / data for both tables within page
 total_headers_all = totals.find_all('th')
 total_rows = totals.find_all('p')
 
 sig_headers_all = sigstrike.find_all('th')
 sig_rows = sigstrike.find_all('p')
 
+# Cleaning the data up
 total_header = []
 total_data = []
 sig_header = []
@@ -35,6 +37,8 @@ for td in sig_rows:
     sig_data.append(td.get_text().strip())
 
 
+# The data within the page alternates between the fighters.
+# This function returns two arrays.  The 'even' data within one and the 'odd' data within the other.
 def alt_array(input_array):
     result_array = []
     second_result_array = []
@@ -46,16 +50,13 @@ def alt_array(input_array):
     return result_array, second_result_array
 
 
-finaltotaldata, finaltotaldata2 = alt_array(total_data)
-
+final_total_data, final_total_data2 = alt_array(total_data)
 final_sig_data, final_sig_data2 = alt_array(sig_data)
 
-
 print(total_header)
-print(finaltotaldata)
-print(finaltotaldata2)
+print(final_total_data)
+print(final_total_data2)
 
 print(sig_header)
 print(final_sig_data)
 print(final_sig_data2)
-
