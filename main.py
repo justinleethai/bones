@@ -3,20 +3,19 @@ from bs4 import BeautifulSoup
 import csv
 
 url = "http://ufcstats.com/fight-details/636fd144716a3084"
-file_name = 'sample.csv'
+FILENAME = 'sample.csv'
 
 result = requests.get(url)
 doc = BeautifulSoup(result.text, "html.parser")
 table = doc.find_all('table')
 totals = table[0]
-sigstrike = table[2]
+sig_strike = table[2]
 
 # Grabbing headers / data for both tables within page
 total_headers_all = totals.find_all('th')
 total_rows = totals.find_all('p')
-
-sig_headers_all = sigstrike.find_all('th')
-sig_rows = sigstrike.find_all('p')
+sig_headers_all = sig_strike.find_all('th')
+sig_rows = sig_strike.find_all('p')
 
 # Cleaning the data up
 total_header = []
@@ -53,10 +52,10 @@ def alt_array(input_array):
 final_total_data, final_total_data2 = alt_array(total_data)
 final_sig_data, final_sig_data2 = alt_array(sig_data)
 
-print(total_header)
-print(final_total_data)
-print(final_total_data2)
+all_data = [total_header, final_total_data, final_total_data2, sig_header, final_sig_data, final_sig_data2]
 
-print(sig_header)
-print(final_sig_data)
-print(final_sig_data2)
+
+with open(FILENAME, 'a') as f:
+    writer = csv.writer(f)
+    writer.writerows(all_data)
+
