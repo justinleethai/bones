@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-url = "http://ufcstats.com/fight-details/636fd144716a3084"
+URL = "http://ufcstats.com/fight-details/636fd144716a3084"
 FILENAME = 'sample.csv'
 
-result = requests.get(url)
+result = requests.get(URL)
 doc = BeautifulSoup(result.text, "html.parser")
 table = doc.find_all('table')
 totals = table[0]
@@ -23,17 +23,26 @@ total_data = []
 sig_header = []
 sig_data = []
 
+#for th in total_headers_all:
+#    total_header.append(th.get_text().strip())
+
+#for td in total_rows:
+#    total_data.append(td.get_text().strip())
+
+#for th in sig_headers_all:
+#    sig_header.append(th.get_text().strip())
+
+#for td in sig_rows:
+#    sig_data.append(td.get_text().strip())
+
 for th in total_headers_all:
     total_header.append(th.get_text().strip())
-
 for td in total_rows:
     total_data.append(td.get_text().strip())
-
 for th in sig_headers_all:
-    sig_header.append(th.get_text().strip())
-
+    total_header.append(th.get_text().strip())
 for td in sig_rows:
-    sig_data.append(td.get_text().strip())
+    total_data.append(td.get_text().strip())
 
 
 # The data within the page alternates between the fighters.
@@ -50,12 +59,14 @@ def alt_array(input_array):
 
 
 final_total_data, final_total_data2 = alt_array(total_data)
-final_sig_data, final_sig_data2 = alt_array(sig_data)
+#final_sig_data, final_sig_data2 = alt_array(sig_data)
 
-all_data = [total_header, final_total_data, final_total_data2, sig_header, final_sig_data, final_sig_data2]
+#all_data = [total_header, final_total_data, final_total_data2, sig_header, final_sig_data, final_sig_data2]
+all_data = [total_header, final_total_data, final_total_data2]
+print(all_data)
 
 
-with open(FILENAME, 'a') as f:
-    writer = csv.writer(f)
-    writer.writerows(all_data)
+#with open(FILENAME, 'a') as f:
+#    writer = csv.writer(f)
+#    writer.writerows(all_data)
 
