@@ -20,20 +20,7 @@ sig_rows = sig_strike.find_all('p')
 # Cleaning the data up
 total_header = []
 total_data = []
-sig_header = []
-sig_data = []
 
-#for th in total_headers_all:
-#    total_header.append(th.get_text().strip())
-
-#for td in total_rows:
-#    total_data.append(td.get_text().strip())
-
-#for th in sig_headers_all:
-#    sig_header.append(th.get_text().strip())
-
-#for td in sig_rows:
-#    sig_data.append(td.get_text().strip())
 
 for th in total_headers_all:
     total_header.append(th.get_text().strip())
@@ -45,8 +32,6 @@ for td in sig_rows:
     total_data.append(td.get_text().strip())
 
 
-# The data within the page alternates between the fighters.
-# This function returns two arrays.  The 'even' data within one and the 'odd' data within the other.
 def alt_array(input_array):
     result_array = []
     second_result_array = []
@@ -59,14 +44,12 @@ def alt_array(input_array):
 
 
 final_total_data, final_total_data2 = alt_array(total_data)
-#final_sig_data, final_sig_data2 = alt_array(sig_data)
 
-#all_data = [total_header, final_total_data, final_total_data2, sig_header, final_sig_data, final_sig_data2]
 all_data = [total_header, final_total_data, final_total_data2]
-print(all_data)
 
 
-#with open(FILENAME, 'a') as f:
-#    writer = csv.writer(f)
-#    writer.writerows(all_data)
+
+with open(FILENAME, 'a') as f:
+    writer = csv.writer(f)
+    writer.writerows(all_data)
 
